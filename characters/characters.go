@@ -1,0 +1,132 @@
+package characters
+
+import (
+	"fmt"
+	"net/url"
+
+	"github.com/abdirizak-alaaja/jikan-gin-api/common"
+	"github.com/abdirizak-alaaja/jikan-gin-api/helper"
+)
+
+// CharactersBase struct
+type CharactersBase struct {
+	MalId     int      `json:"mal_id"`
+	Url       string   `json:"url"`
+	Images    common.Images2  `json:"images"`
+	Name      string   `json:"name"`
+	NameKanji string   `json:"name_kanji"`
+	Nicknames []string `json:"nicknames"`
+	Favorites int      `json:"favorites"`
+	About     string   `json:"about"`
+}
+
+// CharacterById struct
+type CharacterById struct {
+	Data CharactersBase `json:"data"`
+}
+
+// GetCharacterById returns character by id
+func GetCharacterById(id int) (*CharacterById, error) {
+	res := &CharacterById{}
+	err := helper.UrlToStruct(fmt.Sprintf("/characters/%d", id), res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// CharacterAnime struct
+type CharacterAnime struct {
+	Data []struct {
+		Role  string      `json:"role"`
+		Anime common.EntryTitle3 `json:"anime"`
+	} `json:"data"`
+}
+
+// GetCharacterAnime returns character anime
+func GetCharacterAnime(id int) (*CharacterAnime, error) {
+	res := &CharacterAnime{}
+	err := helper.UrlToStruct(fmt.Sprintf("/characters/%d/anime", id), res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// CharacterManga struct
+type CharacterManga struct {
+	Data []struct {
+		Role  string      `json:"role"`
+		Manga common.EntryTitle3 `json:"manga"`
+	} `json:"data"`
+}
+
+// GetCharacterManga returns character manga
+func GetCharacterManga(id int) (*CharacterManga, error) {
+	res := &CharacterManga{}
+	err := helper.UrlToStruct(fmt.Sprintf("/characters/%d/manga", id), res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// CharacterVoiceActors struct
+type CharacterVoiceActors struct {
+	Data []struct {
+		Language string `json:"language"`
+		Person   struct {
+			MalId  int    `json:"mal_id"`
+			Url    string `json:"url"`
+			Images struct {
+				Jpg struct {
+					ImageUrl string `json:"image_url"`
+				} `json:"jpg"`
+			} `json:"images"`
+			Name string `json:"name"`
+		} `json:"person"`
+	} `json:"data"`
+}
+
+// GetCharacterVoiceActors returns character manga
+func GetCharacterVoiceActors(id int) (*CharacterVoiceActors, error) {
+	res := &CharacterVoiceActors{}
+	err := helper.UrlToStruct(fmt.Sprintf("/characters/%d/voices", id), res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+type CharacterPictures struct {
+	Data []struct {
+		ImageUrl      string `json:"image_url"`
+		LargeImageUrl string `json:"large_image_url"`
+	} `json:"data"`
+}
+
+// GetCharacterPictures returns character manga
+func GetCharacterPictures(id int) (*CharacterPictures, error) {
+	res := &CharacterPictures{}
+	err := helper.UrlToStruct(fmt.Sprintf("/characters/%d/pictures", id), res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+// CharactersSearch struct
+type CharactersSearch struct {
+	Data       []CharacterById `json:"data"`
+	Pagination common.Pagination      `json:"pagination"`
+}
+
+// GetCharactersSearch returns characters search
+func GetCharactersSearch(query url.Values) (*CharactersSearch, error) {
+	res := &CharactersSearch{}
+	err := helper.UrlToStruct(fmt.Sprintf("/characters?%s", query.Encode()), res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
