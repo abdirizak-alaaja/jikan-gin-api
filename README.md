@@ -8,7 +8,7 @@ A Go wrapper for the [Jikan v4 API](https://jikan.moe/).
 
 To install/update: `go install github.com/abdirizak-alaaja/jikan-gin-api@latest`
 
-To import: `import "github.com/abdirizak-alaaja/jikan-gin-api"` and use as `jikan-api`
+To import: `import "github.com/abdirizak-alaaja/jikan-gin-api"` and use as `jikan`
 
 
 ### Usage
