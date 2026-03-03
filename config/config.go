@@ -1,4 +1,4 @@
-package jikan
+package config
 
 // Endpoint points to Jikan API
 const Endpoint = "https://api.jikan.moe/v4"
