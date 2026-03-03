@@ -1,0 +1,41 @@
+package schedules
+
+import (
+	"fmt"
+
+	"github.com/abdirizak-alaaja/jikan-gin-api/anime"
+	"github.com/abdirizak-alaaja/jikan-gin-api/common"
+	"github.com/abdirizak-alaaja/jikan-gin-api/helper"
+)
+
+// Schedules struct
+type Schedules struct {
+	Data       []anime.AnimeBase `json:"data"`
+	Pagination common.Pagination  `json:"pagination"`
+}
+
+type ScheduleFilter string
+
+const (
+	ScheduleFilterMonday    ScheduleFilter = "monday"
+	ScheduleFilterTuesday   ScheduleFilter = "tuesday"
+	ScheduleFilterWednesday ScheduleFilter = "wednesday"
+	ScheduleFilterThursday  ScheduleFilter = "thursday"
+	ScheduleFilterFriday    ScheduleFilter = "friday"
+	ScheduleFilterUnknown   ScheduleFilter = "unknown"
+	ScheduleFilterOther     ScheduleFilter = "other"
+)
+
+// GetSchedules returns schedules
+func GetSchedules(filter ScheduleFilter) (*Schedules, error) {
+	res := &Schedules{}
+	req := "/schedules"
+	if filter != "" {
+		req += fmt.Sprintf("?filter=%s", filter)
+	}
+	err := helper.UrlToStruct(req, res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
