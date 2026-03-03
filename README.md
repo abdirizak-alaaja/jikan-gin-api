@@ -25,7 +25,7 @@ import (
 
 func main() {
 	// Get anime
-	anime, err := anime.GetAnimeById(1)
+	anime, err := anime.GetAnimeById(52299)
 	if err != nil {
 		panic(err)
 	}
@@ -36,7 +36,7 @@ func main() {
 ```
 Output:
 
-Cowboy Bebop
+Solo Leveling
 ```
 
 ##### Search Query Example
@@ -57,7 +57,7 @@ import (
 func main() {
 	// Setup query
 	query := url.Values{}
-	query.Set("q", "Cowboy Bebop")
+	query.Set("q", "solo leveling")
 	query.Set("type", "tv")
 
 	// Search anime
@@ -72,7 +72,7 @@ func main() {
 ```
 Output:
 
-8.79
+8.18
 ```
 
 
@@ -84,5 +84,5 @@ access the client via `jikan.Client`.
 Example: setting the client timeout from 60 seconds (default) to 10 seconds.
 
 ```go
-jikan.Client.Timeout = time.Second * 10
+config.ClientTimeout = time.Second * 10
 ```
