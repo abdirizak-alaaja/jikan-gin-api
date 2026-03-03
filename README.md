@@ -36,7 +36,7 @@ func main() {
 ```
 Output:
 
-Solo Leveling
+ Ore dake Level Up na Ken
 ```
 
 ##### Search Query Example
