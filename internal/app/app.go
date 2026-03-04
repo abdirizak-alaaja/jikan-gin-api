@@ -1,4 +1,4 @@
-package internal 
+package app 
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 
 func StartApp()error {
 
-	r := internal.SetupRoutes()
+	r := router.SetupRoutes()
 
 	addr := ":8080"
 	fmt.Printf("Running app on : %s\n", addr)

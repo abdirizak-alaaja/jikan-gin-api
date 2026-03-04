@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	internal "github.com/abdirizak-alaaja/jikan-gin-api/internal/app"
+	"github.com/abdirizak-alaaja/jikan-gin-api/internal/app"
 )
 
 func main() {
@@ -11,6 +11,7 @@ func main() {
 	fmt.Println("#===========Starting Server =======#")
 	fmt.Println("#==================================#")
 
-	if err := internal.StartApp(); err != nil {
+	if err := app.StartApp(); err != nil {
 		panic(err)
-	}}
+	}
+}
