@@ -2,23 +2,15 @@ package main
 
 import (
 	"fmt"
-	"net/url"
 
-	"github.com/abdirizak-alaaja/jikan-gin-api/anime"
+	internal "github.com/abdirizak-alaaja/jikan-gin-api/internal/app"
 )
 
 func main() {
-	fmt.Print("Starter jikan jin api...")
+	fmt.Println("#==================================#")
+	fmt.Println("#===========Starting Server =======#")
+	fmt.Println("#==================================#")
 
-	// Setup query
-	query := url.Values{}
-	query.Set("q", "solo leveling")
-	query.Set("type", "tv")
-
-	// Search anime
-	search, err := anime.GetAnimeSearch(query)
-	if err != nil {
+	if err := internal.StartApp(); err != nil {
 		panic(err)
-	}
-	fmt.Println(search.Data[0])
-}
+	}}
