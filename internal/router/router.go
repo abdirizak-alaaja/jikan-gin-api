@@ -13,6 +13,7 @@ func SetupRoutes() *gin.Engine {
 	GenresRoutes(r)
 	RandomRoutes(r)
 	ClubsRoutes(r)
+	PeopleRoutes(r)
 	MagazinesRoutes(r)
 	ProducersRoutes(r)
 	ReviewsRoutes(r)
@@ -20,6 +21,8 @@ func SetupRoutes() *gin.Engine {
 	SchedulesRoutes(r)
 	SeasonsRoutes(r)
 	TopRoutes(r)
+	UsersRoutes(r)
+	WatchRoutes(r)
 	return r
 
 }
