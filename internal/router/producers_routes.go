@@ -13,7 +13,6 @@ func ProducersRoutes(r *gin.Engine) {
 	// GET /api/v4/producers?page=1
 	prodAPI.GET("", func(ctx *gin.Context) {
 		page := helper.ParsePage(ctx)
-
 		data, err := producers.GetProducers(page)
 		helper.HandleResult(ctx, data, err)
 	})
