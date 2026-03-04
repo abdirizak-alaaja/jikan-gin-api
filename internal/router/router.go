@@ -8,6 +8,7 @@ func SetupRoutes() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Recovery())
 	AnimeRoutes(r)
+	CharactersRoutes(r)
 	return r
 
 }
