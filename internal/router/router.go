@@ -10,6 +10,8 @@ func SetupRoutes() *gin.Engine {
 	AnimeRoutes(r)
 	CharactersRoutes(r)
 	MangaRoutes(r)
+	GenresRoutes(r)
+	RandomRoutes(r)
 	return r
 
 }
