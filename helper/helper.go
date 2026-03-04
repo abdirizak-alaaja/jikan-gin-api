@@ -30,7 +30,6 @@ func UrlToStruct(url string, target interface{}) error {
 	return nil
 }
 
-
 // helper to parse id param
 func ParseID(ctx *gin.Context) (int, bool) {
 	idStr := ctx.Param("id")
@@ -59,4 +58,14 @@ func HandleResult(ctx *gin.Context, data any, err error) {
 		return
 	}
 	ctx.JSON(http.StatusOK, data)
+}
+
+// ParseLimit parses the ?limit= query param (defaults to 25)
+func ParseLimit(ctx *gin.Context) int {
+	limitStr := ctx.DefaultQuery("limit", "25")
+	limit, err := strconv.Atoi(limitStr)
+	if err != nil || limit < 1 {
+		return 25
+	}
+	return limit
 }
