@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"strconv"
 
 	"github.com/abdirizak-alaaja/jikan-gin-api/config"
 	"github.com/abdirizak-alaaja/jikan-gin-api/jikan"
+	"github.com/gin-gonic/gin"
 )
 
 func UrlToStruct(url string, target interface{}) error {
@@ -26,4 +28,35 @@ func UrlToStruct(url string, target interface{}) error {
 		return err
 	}
 	return nil
+}
+
+
+// helper to parse id param
+func ParseID(ctx *gin.Context) (int, bool) {
+	idStr := ctx.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+		return 0, false
+	}
+	return id, true
+}
+
+// helper to parse page query
+func ParsePage(ctx *gin.Context) int {
+	pageStr := ctx.DefaultQuery("page", "1")
+	page, err := strconv.Atoi(pageStr)
+	if err != nil || page < 1 {
+		return 1
+	}
+	return page
+}
+
+// helper to handle results
+func HandleResult(ctx *gin.Context, data any, err error) {
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, data)
 }
