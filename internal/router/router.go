@@ -18,7 +18,7 @@ func SetupRoutes() *gin.Engine {
 	ReviewsRoutes(r)
 	RecommendationsRoutes(r)
 	SchedulesRoutes(r)
-	
+	SeasonsRoutes(r)
 	return r
 
 }
